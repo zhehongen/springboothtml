@@ -1,0 +1,57 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: springboothtml
+  datasource:
+    initialization-mode: always
+    url: jdbc:mysql://mysql:3306/zhetest?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useLegacyDatetimeCode=false&serverTimezone=${timezone}&useSSL=false
+    username: root
+    password: thingsmatrix@8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 下面为连接池的补充设置，应用到上面所有数据源中5 thingsmatrix@8     18.138.254.76
+    initialSize:
+    minIdle: 5
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 打开PSCache，并且指定每个连接上PSCache的大小
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,slf4j
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    logSlowSql: true
+    # 合并多个DruidDataSource的监控数据
+    #useGlobalDataSourceStat: true
+  jpa:
+    database: mysql
+    database-platform: com.rectrl.springboothtml.config.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        jdbc:
+          # batch_size: 500
+          time_zone: ${timezone}
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    timezone: ${timezone}
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+timezone: UTC
+
+
