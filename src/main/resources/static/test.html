@@ -21,7 +21,7 @@
             //异步上传
             $.ajax({
                 type: "post",
-                url: "uploadFile",
+                url: "file/upload",
                 data: formData,
                 dataType: "json",
                 cache: false,
@@ -31,7 +31,8 @@
                 success: function (data) {
                     console.log(data);
                 },
-                error: function () {
+                error: function (exception) {
+                    console.log(exception);
                     alert("请校验上传的文件是否正确！");
                 },
                 beforeSend: function () { //上传文件时将按钮设置不可点击,防止重复提交
@@ -49,7 +50,7 @@
     </script>
 </head>
 <body>
-<p>hello!!!!!!!!!nnnnnnnnnnnnnnn</p>
+<p>test!!!!!!!!!nnnnnnnnnnnnnnn</p>
 <form action="">
     选择文件：
     <input type="file" id="fileName" name="fileName"/>
